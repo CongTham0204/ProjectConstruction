@@ -16,7 +16,7 @@ public class SupplierController {
 	@Autowired
 	SupplierService supplierService;
 	
-	@RequestMapping(value = "/supplier", method = RequestMethod.POST)
+	@RequestMapping(value = "/suppliers", method = RequestMethod.POST)
 	@ResponseBody
 	public SupplierDto createSupplier(@RequestBody SupplierDto supplierDto) {
 

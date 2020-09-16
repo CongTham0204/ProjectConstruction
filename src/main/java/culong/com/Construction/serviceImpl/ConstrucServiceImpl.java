@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,15 +72,11 @@ public class ConstrucServiceImpl implements ConstrucService {
 		Construct construct = modelMapper.map(constructDto, Construct.class);
 
 		Monitoring monitoring = monitoringRepository.findById(constructDto.getMonitoring());
-		if (monitoring == null) {
-			return null;
-		}
+
 		construct.setMonitoring(monitoring);
 
 		Labor labor = laborRepository.findById(constructDto.getLabor());
-		if (labor == null) {
-			return null;
-		}
+
 		construct.setLabor(labor);
 
 		return construct;

@@ -17,7 +17,7 @@ public class ConstrucController {
 	@Autowired
 	ConstrucService construcService;
 	
-	@RequestMapping(value = "/constructttt", method =RequestMethod.POST) 
+	@RequestMapping(value = "/construct", method =RequestMethod.POST) 
 	@ResponseBody
 	public ConstructDto createConstruct(@RequestBody ConstructDto constructDto) {
 		return construcService.createConstruct(constructDto);

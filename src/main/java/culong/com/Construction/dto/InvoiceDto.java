@@ -3,7 +3,7 @@ package culong.com.Construction.dto;
 public class InvoiceDto {
 	private long id;
 	private String link;
-	private long idConstruct;
+	private long idMaterialLiabilitie;
 	public long getId() {
 		return id;
 	}
@@ -16,11 +16,12 @@ public class InvoiceDto {
 	public void setLink(String link) {
 		this.link = link;
 	}
-	public long getIdConstruct() {
-		return idConstruct;
+	public long getIdMaterialLiabilitie() {
+		return idMaterialLiabilitie;
 	}
-	public void setIdConstruct(long idConstruct) {
-		this.idConstruct = idConstruct;
+	public void setIdMaterialLiabilitie(long idMaterialLiabilitie) {
+		this.idMaterialLiabilitie = idMaterialLiabilitie;
 	}
+	
 
 }

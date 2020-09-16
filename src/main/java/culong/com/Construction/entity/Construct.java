@@ -27,7 +27,7 @@ public class Construct {
 	private Monitoring monitoring;
 	private Set<MaterialLiabilitie> listMaterialLiabilitie = new HashSet<MaterialLiabilitie>();
 	private Labor labor;
-	private java.util.List<Invoice> listInvoices = new ArrayList<Invoice>();
+	
 	private Set<ConstructionHistory> listConstructionHistory = new HashSet<ConstructionHistory>();
 	
 
@@ -89,14 +89,7 @@ public class Construct {
 		this.listMaterialLiabilitie = listMaterialLiabilitie;
 	}
 	
-	@OneToMany(mappedBy = "construct")
-	public java.util.List<Invoice> getListInvoices() {
-		return listInvoices;
-	}
-
-	public void setListInvoices(java.util.List<Invoice> listInvoices) {
-		this.listInvoices = listInvoices;
-	}
+	
 	
 	@OneToMany(mappedBy = "construct")
 	public Set<ConstructionHistory> getListConstructionHistory() {

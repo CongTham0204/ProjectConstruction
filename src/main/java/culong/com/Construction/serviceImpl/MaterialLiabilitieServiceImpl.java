@@ -1,5 +1,7 @@
 package culong.com.Construction.serviceImpl;
 
+import java.util.Set;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import culong.com.Construction.dto.MaterialLiabilitieDto;
 import culong.com.Construction.entity.Construct;
+import culong.com.Construction.entity.Invoice;
 import culong.com.Construction.entity.MaterialLiabilitie;
 import culong.com.Construction.entity.MaterialLiabilitieHistory;
 import culong.com.Construction.entity.Supplier;
 import culong.com.Construction.repository.ConstructRepository;
+import culong.com.Construction.repository.InvoiceRepository;
 import culong.com.Construction.repository.MaterialLiabilitieHistoryRepository;
 import culong.com.Construction.repository.MaterialLiabilitieRepository;
 import culong.com.Construction.repository.SupplierRepository;
@@ -21,6 +25,9 @@ public class MaterialLiabilitieServiceImpl implements MaterialLiabilitieService 
 
 	@Autowired
 	ModelMapper modelMapper;
+	
+	@Autowired
+	InvoiceRepository invoiceRepository;
 
 	@Autowired
 	MaterialLiabilitieRepository materialLiabilitieRepository;
@@ -100,9 +107,17 @@ public class MaterialLiabilitieServiceImpl implements MaterialLiabilitieService 
 	}
 	
 	@Override
-	public boolean deleteMaterialLiabilitieDto(long id) {
+	public boolean deleteMaterialLiabilitie(long id) {
 		MaterialLiabilitie materialLiabilitie = materialLiabilitieRepository.findById(id);
 		if(materialLiabilitie != null) {
+			Set<Invoice> listInvoice = materialLiabilitie.getListInvoices();
+			for (Invoice invoice : listInvoice) {
+				invoiceRepository.delete(invoice);
+			}
+			Set<MaterialLiabilitieHistory> listmaterialLiabilitieHistory = materialLiabilitie.getListMaterialLiabilitieHistory();
+			for (MaterialLiabilitieHistory materialLiabilitieHistory : listmaterialLiabilitieHistory) {
+				materialLiabilitieHistoryRepository.delete(materialLiabilitieHistory);
+			}
 			materialLiabilitieRepository.delete(materialLiabilitie);
 			return true;
 		}

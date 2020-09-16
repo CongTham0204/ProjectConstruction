@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Invoice {
 	private long id;
 	private String link;
-	private Construct construct;
+	private MaterialLiabilitie materialLiabilitie;
 	
 	
 	@Id
@@ -27,15 +27,8 @@ public class Invoice {
 		this.id = id;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "idConstruct")
-	public Construct getConstruct() {
-		return construct;
-	}
 	
-	public void setConstruct(Construct construct) {
-		this.construct = construct;
-	}
+	
 	
 	@Column(name = "link")
 	public String getLink() {
@@ -43,6 +36,15 @@ public class Invoice {
 	}
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "idMaterialLiabilitie")
+	public MaterialLiabilitie getMaterialLiabilitie() {
+		return materialLiabilitie;
+	}
+	public void setMaterialLiabilitie(MaterialLiabilitie materialLiabilitie) {
+		this.materialLiabilitie = materialLiabilitie;
 	}
 
 }

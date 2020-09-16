@@ -34,7 +34,7 @@ public class MaterialLiabilitieController {
 	@ResponseBody
 	public boolean deletematerialLiabilitieService(@PathVariable(value = "id") long id) {
 
-		return materialLiabilitieService.deleteMaterialLiabilitieDto(id);
+		return materialLiabilitieService.deleteMaterialLiabilitie(id);
 
 	}
 

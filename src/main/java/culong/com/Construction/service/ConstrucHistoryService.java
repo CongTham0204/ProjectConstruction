@@ -5,7 +5,7 @@ import culong.com.Construction.dto.ConstrucHistoryDto;
 public interface ConstrucHistoryService {
 	ConstrucHistoryDto createConstrucHistory(ConstrucHistoryDto construcHistoryDto);
 
-	boolean deletecreateConstrucHistory(long id);
+	boolean deleteConstrucHistory(long id);
 
-	ConstrucHistoryDto updatecreateConstrucHistory(ConstrucHistoryDto construcHistoryDto);
+	ConstrucHistoryDto updateConstrucHistory(ConstrucHistoryDto construcHistoryDto);
 }

@@ -20,8 +20,17 @@ public class MaterialLiabilitie {
 	private Construct construct;
 	private Supplier supplier;
 	private Set<MaterialLiabilitieHistory> listMaterialLiabilitieHistory = new HashSet<MaterialLiabilitieHistory>();
-
+	private Set<Invoice> listInvoices = new HashSet<Invoice>();
 	
+	@OneToMany(mappedBy = "materialLiabilitie")
+	public Set<Invoice> getListInvoices() {
+		return listInvoices;
+	}
+
+	public void setListInvoices(Set<Invoice> listInvoices) {
+		this.listInvoices = listInvoices;
+	}
+
 	private String name;
 	@Column(name = "nameSupplies")
 	public String getName() {

@@ -122,11 +122,6 @@ public class ConstrucServiceImpl implements ConstrucService {
 
 			}
 
-			List<Invoice> listInvoices = construct.getListInvoices();
-			for (Invoice invoicedelete : listInvoices) {
-				invoiceRepository.delete(invoicedelete);
-			}
-
 			Set<MaterialLiabilitie> listMaterialLiabilitie = construct.getListMaterialLiabilitie();
 			for (MaterialLiabilitie materialLiabilitie : listMaterialLiabilitie) {
 				Set<MaterialLiabilitieHistory> listMaterialLiabilitieHistory = new HashSet<MaterialLiabilitieHistory>();

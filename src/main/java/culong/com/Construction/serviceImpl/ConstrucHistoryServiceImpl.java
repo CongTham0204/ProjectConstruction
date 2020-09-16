@@ -63,7 +63,7 @@ public class ConstrucHistoryServiceImpl implements ConstrucHistoryService {
 	}
 
 	@Override
-	public boolean deletecreateConstrucHistory(long id) {
+	public boolean deleteConstrucHistory(long id) {
 		
 		ConstructionHistory constructionHistory = construcHistoryRepository.findById(id);
 		if(constructionHistory != null) {
@@ -74,7 +74,7 @@ public class ConstrucHistoryServiceImpl implements ConstrucHistoryService {
 	}
 
 	@Override
-	public ConstrucHistoryDto updatecreateConstrucHistory(ConstrucHistoryDto construcHistoryDto) {
+	public ConstrucHistoryDto updateConstrucHistory(ConstrucHistoryDto construcHistoryDto) {
 		ConstructionHistory constructionHistory = construcHistoryRepository.findById(construcHistoryDto.getId());
 		Construct construct = constructRepository.findById(construcHistoryDto.getConstruct());
 		

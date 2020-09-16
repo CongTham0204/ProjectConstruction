@@ -14,6 +14,14 @@ public class ConstructDto {
 	private long monitoring;
 	private Set<MaterialLiabilitie> listMaterialLiabilitie = new HashSet<MaterialLiabilitie>();
 	private long labor;
+	private String nameConstruct;
+	
+	public String getNameConstruct() {
+		return nameConstruct;
+	}
+	public void setNameConstruct(String nameConstruct) {
+		this.nameConstruct = nameConstruct;
+	}
 	public long getId() {
 		return id;
 	}

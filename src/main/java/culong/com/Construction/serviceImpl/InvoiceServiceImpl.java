@@ -18,21 +18,22 @@ import culong.com.Construction.service.InvoiceService;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
-	
+
 	@Autowired
 	ModelMapper modelMapper;
-	
+
 	@Autowired
 	InvoiceRepository invoiceRepository;
-	
+
 	@Autowired
 	MaterialLiabilitieRepository materialLiabilitieRepository;
+
 	private InvoiceDto convertToDto(Invoice invoice) {
 		PropertyMap<Invoice, InvoiceDto> propertyMap = new PropertyMap<Invoice, InvoiceDto>() {
 			protected void configure() {
 
 				map().setIdMaterialLiabilitie(source.getMaterialLiabilitie().getId());
-			
+
 			}
 		};
 
@@ -47,48 +48,46 @@ public class InvoiceServiceImpl implements InvoiceService {
 	private Invoice convertToEntity(InvoiceDto invoiceDto) {
 		Invoice invoice = modelMapper.map(invoiceDto, Invoice.class);
 
-		MaterialLiabilitie materialLiabilitie = materialLiabilitieRepository.findById(invoiceDto.getIdMaterialLiabilitie());
+		MaterialLiabilitie materialLiabilitie = materialLiabilitieRepository
+				.findById(invoiceDto.getIdMaterialLiabilitie());
 		invoice.setMaterialLiabilitie(materialLiabilitie);
 
 		return invoice;
 
 	}
 
-	
-	
-	
-	
-	
 	@Override
 	public InvoiceDto createInvoice(InvoiceDto invoiceDto) {
-		 MaterialLiabilitie materialLiabilitie = materialLiabilitieRepository.findById(invoiceDto.getIdMaterialLiabilitie());
-		if(materialLiabilitie != null) {
+		MaterialLiabilitie materialLiabilitie = materialLiabilitieRepository
+				.findById(invoiceDto.getIdMaterialLiabilitie());
+		if (materialLiabilitie != null) {
 			Invoice invoice = invoiceRepository.save(convertToEntity(invoiceDto));
 			return convertToDto(invoice);
-			
+
 		}
-		 return null;
+		return null;
 	}
 
 	@Override
 	public InvoiceDto updateInvoice(InvoiceDto invoiceDto) {
-		 MaterialLiabilitie materialLiabilitie = materialLiabilitieRepository.findById(invoiceDto.getIdMaterialLiabilitie());
-		 Invoice invoice = invoiceRepository.findById(invoiceDto.getId());
-		 if(materialLiabilitie != null && invoice !=null) {
-			 		Invoice invoiceUpdate = invoiceRepository.save(invoice);
-			 		return convertToDto(invoiceUpdate);
+		MaterialLiabilitie materialLiabilitie = materialLiabilitieRepository
+				.findById(invoiceDto.getIdMaterialLiabilitie());
+		Invoice invoice = invoiceRepository.findById(invoiceDto.getId());
+		if (materialLiabilitie != null && invoice != null) {
+			Invoice invoiceUpdate = invoiceRepository.save(invoice);
+			return convertToDto(invoiceUpdate);
 		}
-		 return null;
+		return null;
 	}
 
 	@Override
 	public boolean deleteInvoice(long id) {
 		Invoice invoice = invoiceRepository.findById(id);
-		if(invoice != null) {
+		if (invoice != null) {
 			invoiceRepository.delete(invoice);
 			return true;
 		}
-		
+
 		return false;
 	}
 

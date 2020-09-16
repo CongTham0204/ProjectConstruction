@@ -1,0 +1,9 @@
+package culong.com.Construction.service;
+
+import culong.com.Construction.dto.MaterialLiabilitieHistoryDto;
+
+public interface MaterialLiabilitieHistoryService {
+	MaterialLiabilitieHistoryDto createMaterialLiabilitieHistory(MaterialLiabilitieHistoryDto materialLiabilitieHistoryDto);
+	MaterialLiabilitieHistoryDto updateMaterialLiabilitieHistory(MaterialLiabilitieHistoryDto materialLiabilitieHistoryDto);
+	boolean deleteMaterialLiabilitieHistory(long id);
+}

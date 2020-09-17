@@ -5,7 +5,6 @@ import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import culong.com.Construction.dto.ConstructDto;
 import culong.com.Construction.dto.MaterialLiabilitieDto;

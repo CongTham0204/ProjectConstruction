@@ -54,7 +54,7 @@ public class ConstrucServiceImpl implements ConstrucService {
 		Monitoring monitoring = monitoringRepository.findById(constructDto.getMonitoring());
 		Labor labor = laborRepository.findById(constructDto.getLabor());
 		Construct construct = new Construct();
-		if (monitoring == null ) {
+		if (monitoring == null || labor != null) {
 			return null;
 		} else {
 			construct = constructRepository

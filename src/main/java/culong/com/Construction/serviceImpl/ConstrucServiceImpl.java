@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import culong.com.Construction.Mapping.ConstructMapping;
 import culong.com.Construction.dto.ConstructDto;
-import culong.com.Construction.dto.MaterialLiabilitieDto;
 import culong.com.Construction.entity.Construct;
 import culong.com.Construction.entity.ConstructionHistory;
 import culong.com.Construction.entity.Labor;
@@ -55,7 +54,7 @@ public class ConstrucServiceImpl implements ConstrucService {
 		Monitoring monitoring = monitoringRepository.findById(constructDto.getMonitoring());
 		Labor labor = laborRepository.findById(constructDto.getLabor());
 		Construct construct = new Construct();
-		if (monitoring == null) {
+		if (monitoring == null || labor != null) {
 			return null;
 		} else {
 			construct = constructRepository

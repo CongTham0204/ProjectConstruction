@@ -1,10 +1,15 @@
 package culong.com.Construction.Mapping;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
+import culong.com.Construction.dto.ConstructDto;
 import culong.com.Construction.dto.InvoiceDto;
 import culong.com.Construction.dto.LaborDto;
+import culong.com.Construction.entity.Construct;
 import culong.com.Construction.entity.Invoice;
 import culong.com.Construction.entity.Labor;
 import culong.com.Construction.entity.MaterialLiabilitie;
@@ -15,7 +20,14 @@ public class LaborMapping {
 		PropertyMap<Labor, LaborDto> propertyMap = new PropertyMap<Labor, LaborDto>() {
 			protected void configure() {
 
-				map().setListConstruct(source.getListConstruct());
+				Set<Construct> list = labor.getListConstruct();
+				Set<ConstructDto> listLabor = new HashSet<ConstructDto>();
+				for (Construct construct : list) {
+					ConstructDto constructDto =new ConstructDto();
+					constructDto.setId(construct.getId());
+					listLabor.add(constructDto);
+				}
+				map().setListConstruct(listLabor);
 
 			}
 		};
@@ -28,15 +40,12 @@ public class LaborMapping {
 
 	}
 
-	public static Invoice convertToEntity(InvoiceDto invoiceDto,MaterialLiabilitieRepository materialLiabilitieRepository) {
+	public static Labor convertToEntity(LaborDto laborDto ) {
 		ModelMapper modelMapper = new ModelMapper();
-		Invoice invoice = modelMapper.map(invoiceDto, Invoice.class);
+		Labor labor = modelMapper.map(laborDto, Labor.class);
 
-		MaterialLiabilitie materialLiabilitie = materialLiabilitieRepository
-				.findById(invoiceDto.getIdMaterialLiabilitie());
-		invoice.setMaterialLiabilitie(materialLiabilitie);
 
-		return invoice;
+		return labor;
 
 	}
 }

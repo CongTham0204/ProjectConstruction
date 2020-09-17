@@ -29,6 +29,8 @@ public class ConstructMapping {
 				for (MaterialLiabilitie materialLiabilitie : list) {
 					MaterialLiabilitieDto materialLiabilitieDto = new MaterialLiabilitieDto();
 					materialLiabilitieDto.setId(materialLiabilitie.getId());
+					materialLiabilitieDto.setName(materialLiabilitie.getName());
+					
 					listMaterialLiabilitie.add(materialLiabilitieDto);
 
 				}
@@ -49,11 +51,11 @@ public class ConstructMapping {
 		ModelMapper modelMapper = new ModelMapper();
 
 		Construct construct = modelMapper.map(constructDto, Construct.class);
+		
 		Monitoring monitoring = monitoringRepository.findById(constructDto.getMonitoring());
-
 		construct.setMonitoring(monitoring);
+		
 		Labor labor = laborRepository.findById(constructDto.getLabor());
-
 		construct.setLabor(labor);
 
 		return construct;

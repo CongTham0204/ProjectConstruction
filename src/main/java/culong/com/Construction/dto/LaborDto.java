@@ -3,18 +3,19 @@ package culong.com.Construction.dto;
 import java.util.HashSet;
 import java.util.Set;
 
-import culong.com.Construction.entity.Construct;
 
 public class LaborDto {
 	private long id;
 	private String nameLabor;
-	private Set<Construct> listConstruct = new HashSet<Construct>();
+	private Set<ConstructDto> listConstruct = new HashSet<ConstructDto>();
 
-	public Set<Construct> getListConstruct() {
+	
+
+	public Set<ConstructDto> getListConstruct() {
 		return listConstruct;
 	}
 
-	public void setListConstruct(Set<Construct> listConstruct) {
+	public void setListConstruct(Set<ConstructDto> listConstruct) {
 		this.listConstruct = listConstruct;
 	}
 

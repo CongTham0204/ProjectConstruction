@@ -1,18 +1,17 @@
 package culong.com.Construction.serviceImpl;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import culong.com.Construction.Mapping.ConstructMapping;
 import culong.com.Construction.dto.ConstructDto;
+import culong.com.Construction.dto.MaterialLiabilitieDto;
 import culong.com.Construction.entity.Construct;
 import culong.com.Construction.entity.ConstructionHistory;
-import culong.com.Construction.entity.Invoice;
 import culong.com.Construction.entity.Labor;
 import culong.com.Construction.entity.MaterialLiabilitie;
 import culong.com.Construction.entity.MaterialLiabilitieHistory;
@@ -51,48 +50,18 @@ public class ConstrucServiceImpl implements ConstrucService {
 	@Autowired
 	ModelMapper modelMapper;
 
-	private ConstructDto convertToDto(Construct construct) {
-		PropertyMap<Construct, ConstructDto> propertyMap = new PropertyMap<Construct, ConstructDto>() {
-			protected void configure() {
-
-				map().setMonitoring(source.getMonitoring().getId());
-				map().setLabor(source.getLabor().getId());
-			}
-		};
-
-		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.addMappings(propertyMap);
-		ConstructDto constructDto = modelMapper.map(construct, ConstructDto.class);
-
-		return constructDto;
-
-	}
-
-	private Construct convertToEntity(ConstructDto constructDto) {
-		Construct construct = modelMapper.map(constructDto, Construct.class);
-
-		Monitoring monitoring = monitoringRepository.findById(constructDto.getMonitoring());
-
-		construct.setMonitoring(monitoring);
-
-		Labor labor = laborRepository.findById(constructDto.getLabor());
-
-		construct.setLabor(labor);
-
-		return construct;
-
-	}
-
 	@Override
 	public ConstructDto createConstruct(ConstructDto constructDto) {
 		Monitoring monitoring = monitoringRepository.findById(constructDto.getMonitoring());
 		Labor labor = laborRepository.findById(constructDto.getLabor());
 		Construct construct = new Construct();
-		if (monitoring == null || labor == null) {
+		if (monitoring == null) {
 			return null;
 		} else {
-			construct = constructRepository.save(convertToEntity(constructDto));
-			return convertToDto(construct);
+			construct = constructRepository
+					.save(ConstructMapping.convertToEntity(constructDto, monitoringRepository, laborRepository));
+
+			return ConstructMapping.convertToDto(construct);
 		}
 
 	}
@@ -105,8 +74,9 @@ public class ConstrucServiceImpl implements ConstrucService {
 
 		if (construct != null && labor != null && monitoring != null) {
 
-			construct = constructRepository.save(convertToEntity(constructDto));
-			return convertToDto(construct);
+			construct = constructRepository
+					.save(ConstructMapping.convertToEntity(constructDto, monitoringRepository, laborRepository));
+			return ConstructMapping.convertToDto(construct);
 		}
 
 		return null;

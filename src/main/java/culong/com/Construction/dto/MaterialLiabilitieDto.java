@@ -1,13 +1,33 @@
 package culong.com.Construction.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import culong.com.Construction.entity.Invoice;
+import culong.com.Construction.entity.MaterialLiabilitieHistory;
+
 public class MaterialLiabilitieDto {
 	private long id;
 	private String name;
 	private long supplier;
+	private Set<MaterialLiabilitieHistory> listMaterialLiabilitieHistory = new HashSet<MaterialLiabilitieHistory>();
+	private Set<Invoice> listInvoices = new HashSet<Invoice>();
 
-	
+	public Set<MaterialLiabilitieHistory> getListMaterialLiabilitieHistory() {
+		return listMaterialLiabilitieHistory;
+	}
 
+	public void setListMaterialLiabilitieHistory(Set<MaterialLiabilitieHistory> listMaterialLiabilitieHistory) {
+		this.listMaterialLiabilitieHistory = listMaterialLiabilitieHistory;
+	}
 
+	public Set<Invoice> getListInvoices() {
+		return listInvoices;
+	}
+
+	public void setListInvoices(Set<Invoice> listInvoices) {
+		this.listInvoices = listInvoices;
+	}
 
 	public long getSupplier() {
 		return supplier;

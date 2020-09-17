@@ -1,18 +1,15 @@
 package culong.com.Construction.dto;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 
-import culong.com.Construction.entity.Invoice;
-import culong.com.Construction.entity.MaterialLiabilitie;
 
 public class ConstructDto {
 	private long id;
 	private long monitoring;
-	private Set<MaterialLiabilitie> listMaterialLiabilitie = new HashSet<MaterialLiabilitie>();
+	private Set<MaterialLiabilitieDto> listMaterialLiabilitie = new HashSet<MaterialLiabilitieDto>();
 	private long labor;
 	private String nameConstruct;
 	
@@ -34,10 +31,11 @@ public class ConstructDto {
 	public void setMonitoring(long monitoring) {
 		this.monitoring = monitoring;
 	}
-	public Set<MaterialLiabilitie> getListMaterialLiabilitie() {
+	
+	public Set<MaterialLiabilitieDto> getListMaterialLiabilitie() {
 		return listMaterialLiabilitie;
 	}
-	public void setListMaterialLiabilitie(Set<MaterialLiabilitie> listMaterialLiabilitie) {
+	public void setListMaterialLiabilitie(Set<MaterialLiabilitieDto> listMaterialLiabilitie) {
 		this.listMaterialLiabilitie = listMaterialLiabilitie;
 	}
 	public long getLabor() {
@@ -46,12 +44,7 @@ public class ConstructDto {
 	public void setLabor(long labor) {
 		this.labor = labor;
 	}
-	public java.util.List<Invoice> getListInvoices() {
-		return listInvoices;
-	}
-	public void setListInvoices(java.util.List<Invoice> listInvoices) {
-		this.listInvoices = listInvoices;
-	}
+	
 	public String getAddress() {
 		return address;
 	}
@@ -125,7 +118,7 @@ public class ConstructDto {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-	private java.util.List<Invoice> listInvoices = new ArrayList<Invoice>();
+
 	
 	
 	private String address;

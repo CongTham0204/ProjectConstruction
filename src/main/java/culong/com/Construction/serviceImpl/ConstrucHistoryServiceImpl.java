@@ -1,11 +1,10 @@
 package culong.com.Construction.serviceImpl;
 
-import org.hibernate.mapping.Map;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import culong.com.Construction.Mapping.ConstructHistoryMapping;
 import culong.com.Construction.dto.ConstrucHistoryDto;
 import culong.com.Construction.entity.Construct;
 import culong.com.Construction.entity.ConstructionHistory;
@@ -24,31 +23,7 @@ public class ConstrucHistoryServiceImpl implements ConstrucHistoryService {
 	@Autowired
 	ConstrucHistoryRepository construcHistoryRepository;
 
-	private ConstrucHistoryDto convertDto(ConstructionHistory constructionHistory) {
-
-		PropertyMap<ConstructionHistory, ConstrucHistoryDto> propertyMap = new PropertyMap<ConstructionHistory, ConstrucHistoryDto>() {
-			protected void configure() {
-
-				map().setConstruct(source.getConstruct().getId());
-			}
-		};
-
-		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.addMappings(propertyMap);
-		ConstrucHistoryDto constructHistoryDto = modelMapper.map(constructionHistory, ConstrucHistoryDto.class);
-
-		return constructHistoryDto;
-	}
-
-	private ConstructionHistory convertEntity(ConstrucHistoryDto construcHistoryDto) {
-		ConstructionHistory constructionHistory = modelMapper.map(construcHistoryDto, ConstructionHistory.class);
-		Construct construct = constructRepository.findById(construcHistoryDto.getConstruct());
-
-		constructionHistory.setConstruct(construct);
-		return constructionHistory;
-
-	}
-
+	
 	@Override
 	public ConstrucHistoryDto createConstrucHistory(ConstrucHistoryDto construcHistoryDto) {
 		Construct construct = constructRepository.findById(construcHistoryDto.getConstruct());
@@ -57,9 +32,9 @@ public class ConstrucHistoryServiceImpl implements ConstrucHistoryService {
 
 		}
 
-		ConstructionHistory constructionHistory = construcHistoryRepository.save(convertEntity(construcHistoryDto));
+		ConstructionHistory constructionHistory = construcHistoryRepository.save(ConstructHistoryMapping.convertEntity(construcHistoryDto,constructRepository));
 
-		return convertDto(constructionHistory);
+		return ConstructHistoryMapping.convertDto(constructionHistory);
 	}
 
 	@Override
@@ -79,8 +54,8 @@ public class ConstrucHistoryServiceImpl implements ConstrucHistoryService {
 		Construct construct = constructRepository.findById(construcHistoryDto.getConstruct());
 		
 		if(constructionHistory != null && construct != null) {
-			 constructionHistory = construcHistoryRepository.save(convertEntity(construcHistoryDto));
-			return convertDto(constructionHistory);
+			 constructionHistory = construcHistoryRepository.save(ConstructHistoryMapping.convertEntity(construcHistoryDto,constructRepository));
+			return ConstructHistoryMapping.convertDto(constructionHistory);
 			
 		}
 		return null;

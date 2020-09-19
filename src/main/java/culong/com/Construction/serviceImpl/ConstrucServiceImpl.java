@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import culong.com.Construction.ErrorMessage;
 import culong.com.Construction.Mapping.ConstructMapping;
 import culong.com.Construction.dto.ConstructDto;
 import culong.com.Construction.entity.Construct;
@@ -23,6 +24,7 @@ import culong.com.Construction.repository.MaterialLiabilitieHistoryRepository;
 import culong.com.Construction.repository.MaterialLiabilitieRepository;
 import culong.com.Construction.repository.MonitoringRepository;
 import culong.com.Construction.service.ConstrucService;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 @Service
 public class ConstrucServiceImpl implements ConstrucService {
@@ -55,7 +57,7 @@ public class ConstrucServiceImpl implements ConstrucService {
 		Labor labor = laborRepository.findById(constructDto.getLabor());
 		Construct construct = new Construct();
 		if (monitoring == null || labor == null) {
-			return null;
+			  return null;
 		} else {
 			construct = constructRepository
 					.save(ConstructMapping.convertToEntity(constructDto, monitoringRepository, laborRepository));
@@ -77,8 +79,10 @@ public class ConstrucServiceImpl implements ConstrucService {
 					.save(ConstructMapping.convertToEntity(constructDto, monitoringRepository, laborRepository));
 			return ConstructMapping.convertToDto(construct);
 		}
+	
 
 		return null;
+		
 	}
 
 	@Override
